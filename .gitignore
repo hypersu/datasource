@@ -1,3 +1,9 @@
+# Idea .idea directory
+/.idea
+
+# Maven target directory
+/target
+
 # Compiled class file
 *.class
 
