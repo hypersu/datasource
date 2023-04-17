@@ -1,0 +1,11 @@
+{
+  "name": "mysql",
+  "attributes": {
+    "user": "root",
+    "password": null,
+    "host": null,
+    "port": 3306,
+    "database": null,
+    "properties": {}
+  }
+}
