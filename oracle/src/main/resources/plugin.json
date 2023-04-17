@@ -1,0 +1,49 @@
+{
+  "name": "mysql",
+  "class": "com.hs.datasource.mysql.OracleDataSource",
+  "description": "oracle数据源11g版本及以上",
+  "attributes": {
+    "user": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "用户名称"
+    },
+    "password": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "用户密码"
+    },
+    "host": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "主机地址"
+    },
+    "port": {
+      "value": 3306,
+      "type": "integer",
+      "required": true,
+      "visible": true,
+      "description": "主机端口"
+    },
+    "database": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "数据库名"
+    },
+    "mode": {
+      "value": null,
+      "type": "string",
+      "required": false,
+      "visible": true,
+      "description": "连接方式"
+    }
+  }
+}
