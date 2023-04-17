@@ -1,0 +1,9 @@
+com\hs\datasource\rdbms\RdbmsConnectionAdapter.class
+com\hs\datasource\rdbms\RdbmsMetaDataAdapter.class
+com\hs\datasource\rdbms\RdbmsDriver.class
+com\hs\datasource\rdbms\RdbmsDialect.class
+com\hs\datasource\rdbms\RdbmsConst.class
+com\hs\datasource\rdbms\RdbmsErrorCode.class
+com\hs\datasource\rdbms\RdbmsType.class
+com\hs\datasource\rdbms\RdbmsKey.class
+com\hs\datasource\rdbms\RdbmsDataSource.class
