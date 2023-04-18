@@ -1,8 +1,11 @@
 # Idea .idea directory
 /.idea
 
+# Idea *.iml file
+/*.iml
+
 # Maven target directory
-/target
+/*/target
 
 # Compiled class file
 *.class
