@@ -39,7 +39,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>assembly</id>
+                        <id>mysql-assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
