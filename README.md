@@ -16,7 +16,7 @@ DataSource项目为解决数据源客户端SDK版本冲突；不支持横向、�
      <artifactId>datasource</artifactId>
      <groupId>com.hs.datasource</groupId>
      <version>1.0.0</version>
-   </dependency>]
+   </dependency>
    ```
 3. 生成数据源配置文件。
    ```
