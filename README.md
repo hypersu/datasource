@@ -9,8 +9,9 @@ DataSource项目为解决数据源客户端SDK版本冲突；不支持横向、�
 ## 安装步骤
     make clean install
 ## 使用方法
-1. 配置DATASOURCE_HOME环境变量，一般为DataSource的安装目录。
-2. 项目引用core依赖。
+1. 解压assembly打包模块中target/datasource.tar.gz文件。
+2. 配置DATASOURCE_HOME环境变量，一般为DataSource的安装目录。
+3. 项目引用core依赖。
    ```
    <dependency>
      <artifactId>datasource</artifactId>
@@ -18,7 +19,7 @@ DataSource项目为解决数据源客户端SDK版本冲突；不支持横向、�
      <version>1.0.0</version>
    </dependency>
    ```
-3. 生成数据源配置文件。
+4. 生成数据源配置文件。
    ```
    {
      "name": "mysql",
@@ -32,7 +33,7 @@ DataSource项目为解决数据源客户端SDK版本冲突；不支持横向、�
      }
    }
    ```
-4. 使用DataSources API创建数据源。
+5. 使用DataSources API创建数据源。
    ```
    public class Test {
     public static void main(String[] args) {
