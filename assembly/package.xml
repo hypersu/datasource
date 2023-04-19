@@ -10,22 +10,25 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>../core/target/datasource/</directory>
+            <directory>../core/target/datasource</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
+            <outputDirectory></outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>../mysql/target/datasource/</directory>
+            <directory>../mysql/target/datasource</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
+            <outputDirectory></outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>../oracle/target/datasource/</directory>
+            <directory>../oracle/target/datasource</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
+            <outputDirectory></outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
