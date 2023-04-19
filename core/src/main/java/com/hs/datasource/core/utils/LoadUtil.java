@@ -13,7 +13,7 @@ import java.util.Map;
 public class LoadUtil {
     private static final Map<String, JarLoader> CLASS_LOADER_MAP = new HashMap<>();
 
-    public static JarLoader getClassLoader(String pluginName) {
+    public static synchronized JarLoader getClassLoader(String pluginName) {
         JarLoader loader = CLASS_LOADER_MAP.get(pluginName);
         if (null == loader) {
             String path = Plugins.getPath(pluginName);

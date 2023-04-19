@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Plugins {
     private static final Map<String, ObjectNode> PLUGINS = new ConcurrentHashMap<>();
 
-    public static ObjectNode read(String name) {
+    public static synchronized ObjectNode read(String name) {
         ObjectNode plugin = PLUGINS.get(name);
         if (plugin == null) {
             String path = getPath(name) + File.separator + "plugin.json";
