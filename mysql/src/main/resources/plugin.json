@@ -117,10 +117,6 @@
           "type": "integer",
           "description": "字段标度"
         },
-        "primary": {
-          "type": "boolean",
-          "description": "是否主键"
-        },
         "nullable": {
           "type": "boolean",
           "description": "是否可空"

@@ -1,6 +1,6 @@
 {
-  "name": "mysql",
-  "class": "com.hs.datasource.mysql.OracleDataSource",
+  "name": "oracle",
+  "class": "com.hs.datasource.oracle.OracleDataSource",
   "description": "oracle数据源11g版本及以上",
   "attributes": {
     "user": {
@@ -25,7 +25,7 @@
       "description": "主机地址"
     },
     "port": {
-      "value": 3306,
+      "value": 1521,
       "type": "integer",
       "required": true,
       "visible": true,
@@ -36,14 +36,137 @@
       "type": "string",
       "required": true,
       "visible": true,
-      "description": "数据库名"
+      "description": "实例名/服务名"
     },
     "mode": {
       "value": null,
       "type": "string",
-      "required": false,
+      "required": true,
       "visible": true,
       "description": "连接方式"
+    },
+    "properties": {
+      "value": null,
+      "type": "map",
+      "required": false,
+      "visible": true,
+      "description": "属性列表"
+    }
+  },
+  "meta": {
+    "type": [
+      "schema",
+      "table",
+      "column",
+      "primary"
+    ],
+    "catalog": {
+      "hierarchy": "schema.%{schema}",
+      "parent_type": null,
+      "fields": {
+        "schema": {
+          "type": "string",
+          "description": "模式名"
+        }
+      }
+    },
+    "table": {
+      "hierarchy": "schema.%{schema}.table.%{table_name}",
+      "parent_type": "schema",
+      "fields": {
+        "schema": {
+          "type": "string",
+          "description": "模式名"
+        },
+        "table_name": {
+          "type": "string",
+          "description": "表名"
+        },
+        "comment": {
+          "type": "string",
+          "description": "表注释"
+        }
+      }
+    },
+    "column": {
+      "hierarchy": "schema.%{schema}.table.%{table_name}.column.%{column_name}",
+      "parent_type": "table",
+      "fields": {
+        "schema": {
+          "type": "string",
+          "description": "模式名"
+        },
+        "table_name": {
+          "type": "string",
+          "description": "表名"
+        },
+        "column_name": {
+          "type": "string",
+          "description": "字段名"
+        },
+        "data_type": {
+          "type": "integer",
+          "description": "数据类型"
+        },
+        "type_name": {
+          "type": "string",
+          "description": "类型名称"
+        },
+        "length": {
+          "type": "integer",
+          "description": "字段长度"
+        },
+        "precision": {
+          "type": "integer",
+          "description": "字段精度"
+        },
+        "scale": {
+          "type": "integer",
+          "description": "字段标度"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "是否主键"
+        },
+        "nullable": {
+          "type": "boolean",
+          "description": "是否可空"
+        },
+        "comment": {
+          "type": "string",
+          "description": "字段注释"
+        },
+        "sort": {
+          "type": "integer",
+          "description": "字段排序"
+        }
+      }
+    },
+    "primary": {
+      "hierarchy": "schema.%{schema}.table.%{table_name}.primary.%{column_name}",
+      "parent_type": "table",
+      "fields": {
+        "schema": {
+          "type": "string",
+          "description": "模式名"
+        },
+        "table_name": {
+          "type": "string",
+          "description": "表名"
+        },
+        "column_name": {
+          "type": "string",
+          "description": "字段名"
+        },
+        "key_seq": {
+          "type": "int",
+          "description": "字段序号"
+        },
+        "pk_name": {
+          "type": "string",
+          "description": "主键名"
+        }
+      }
     }
   }
 }

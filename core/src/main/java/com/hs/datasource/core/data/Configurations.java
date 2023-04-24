@@ -4,7 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hs.datasource.common.DataSourceConst;
+import com.hs.datasource.common.DataSourceErrorCode;
+import com.hs.datasource.common.DataSourceKey;
+import com.hs.datasource.common.exception.CommonException;
 import com.hs.datasource.common.utils.JsonUtil;
+import com.hs.datasource.core.Plugins;
 
 import java.io.File;
 
@@ -47,5 +51,41 @@ public class Configurations {
         if (file.exists()) {
             file.delete();
         }
+    }
+
+    public static String asText(String pluginName, ObjectNode object, String key) {
+        ObjectNode attribute = Plugins.readAttributes(pluginName, key);
+        boolean required = attribute.get(DataSourceKey.REQUIRED).asBoolean();
+        JsonNode node = object.get(key);
+        if (required) {
+            if (node == null || node.asText() == null) {
+                throw CommonException.asException(
+                        DataSourceErrorCode.REQUIRED_VALUE,
+                        String.format("您提供配置文件有误，[%s]是必填参数，不允许为空或者留白.", key));
+            }
+        } else {
+            if (node == null || node.asText() == null) {
+                return null;
+            }
+        }
+        return node.asText();
+    }
+
+    public static int asInt(String pluginName, ObjectNode object, String key) {
+        ObjectNode attribute = Plugins.readAttributes(pluginName, key);
+        boolean required = attribute.get(DataSourceKey.REQUIRED).asBoolean();
+        JsonNode node = object.get(key);
+        if (required) {
+            if (node == null || node.asText() == null) {
+                throw CommonException.asException(
+                        DataSourceErrorCode.REQUIRED_VALUE,
+                        String.format("您提供配置文件有误，[%s]是必填参数，不允许为空或者留白.", key));
+            }
+        } else {
+            if (node == null || node.asText() == null) {
+                return 0;
+            }
+        }
+        return node.asInt();
     }
 }

@@ -28,6 +28,16 @@ public class Plugins {
         return (ObjectNode) plugin.get(DataSourceKey.META);
     }
 
+    public static ObjectNode readAttributes(String name) {
+        ObjectNode plugin = read(name);
+        return (ObjectNode) plugin.get(DataSourceKey.ATTRIBUTES);
+    }
+
+    public static ObjectNode readAttributes(String name, String key) {
+        ObjectNode attributes = readAttributes(name);
+        return (ObjectNode) attributes.get(key);
+    }
+
     public static ObjectNode readTemplate(String name) {
         return (ObjectNode) JsonUtil.read(getPath(name) + File.separator + "plugin_template.json");
     }

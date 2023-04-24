@@ -6,9 +6,8 @@ import com.hs.datasource.common.ErrorCode;
  *
  */
 public enum CommonErrorCode implements ErrorCode {
-
-    JSON_PROCESSING_EXCEPTION("Common-0", "Json处理异常."),
-    RUNTIME_EXCEPTION("Common-1", "运行时内部调用错误."),
+    JSON_PROCESSING_EXCEPTION("Common-00", "Json处理异常."),
+    RUNTIME_EXCEPTION("Common-01", "运行时内部调用错误."),
     ;
 
     private final String code;
