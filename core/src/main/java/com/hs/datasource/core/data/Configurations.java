@@ -8,9 +8,11 @@ import com.hs.datasource.common.DataSourceErrorCode;
 import com.hs.datasource.common.DataSourceKey;
 import com.hs.datasource.common.exception.CommonException;
 import com.hs.datasource.common.utils.JsonUtil;
-import com.hs.datasource.core.Plugins;
+import com.hs.datasource.common.utils.StringUtil;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Configurations {
 
@@ -53,44 +55,32 @@ public class Configurations {
         }
     }
 
-    public static void validateRequired(ObjectNode conf, String key) {
-        String pluginName = conf.get(DataSourceKey.NAME).asText();
-        ObjectNode attribute = Plugins.readAttributes(pluginName, key);
-        boolean required = attribute.get(DataSourceKey.REQUIRED).asBoolean();
-        JsonNode node = conf.get(key);
-        if (required) {
-            if (node == null) {
-                throw CommonException.asException(
-                        DataSourceErrorCode.REQUIRED_VALUE,
-                        String.format("您提供配置文件有误，[%s]是必填参数，不允许为空或者留白.", key));
+    public static void validateRequiredConfig(ObjectNode config, ObjectNode plugin) {
+        ObjectNode configAttributes = (ObjectNode) config.get(DataSourceKey.ATTRIBUTES);
+        ObjectNode pluginAttributes = (ObjectNode) plugin.get(DataSourceKey.ATTRIBUTES);
+        validateRequiredAttributes(configAttributes, pluginAttributes);
+    }
+
+    public static void validateRequired(ObjectNode object, String key) {
+        JsonNode node = object.get(key);
+        if (node == null || StringUtil.isBlank(node.asText())) {
+            throw CommonException.asException(
+                    DataSourceErrorCode.REQUIRED_VALUE,
+                    String.format("您提供配置文件有误，[%s]是必填参数，不允许为空或者留白.", key));
+        }
+    }
+
+    public static void validateRequiredAttributes(ObjectNode attributes, ObjectNode attributesTemplate) {
+        Iterator<Map.Entry<String, JsonNode>> pluginAttrIterator = attributesTemplate.fields();
+        while (pluginAttrIterator.hasNext()) {
+            Map.Entry<String, JsonNode> entry = pluginAttrIterator.next();
+            String attribute = entry.getKey();
+            ObjectNode value = (ObjectNode) entry.getValue();
+            boolean required = value.get(DataSourceKey.REQUIRED).asBoolean();
+            if (required) {
+                validateRequired(attributes, attribute);
             }
         }
     }
 
-    public static String asString(ObjectNode conf, String key) {
-        validateRequired(conf, key);
-        JsonNode node = conf.get(key);
-
-        if (node == null || node.asText() == null) {
-            return null;
-        }
-
-        return node.asText();
-    }
-
-    public static Integer asInteger(ObjectNode conf, String key) {
-        validateRequired(conf, key);
-        JsonNode node = conf.get(key);
-
-        if (node == null) {
-            return null;
-        }
-
-        return node.asInt();
-    }
-
-    public static ObjectNode asMap(ObjectNode conf, String key) {
-        validateRequired(conf, key);
-        return (ObjectNode) conf.get(key);
-    }
 }

@@ -13,8 +13,19 @@ public class DataSources {
      * 根据配置实例化
      */
     public static DataSource newInstance(ObjectNode config) {
+        // 校验 name,datasource
+        Configurations.validateRequired(config, DataSourceKey.NAME);
+        Configurations.validateRequired(config, DataSourceKey.DATASOURCE);
+
+        // 获取 plugin
         String pluginName = config.get(DataSourceKey.NAME).asText();
-        String className = config.get(DataSourceKey.CLASS).asText();
+        ObjectNode plugin = Plugins.read(pluginName);
+        String className = plugin.get(DataSourceKey.CLASS).asText();
+        config.put(DataSourceKey.CLASS, className);
+
+        // 校验 config
+        Configurations.validateRequiredConfig(config, plugin);
+
         DataSource dataSource = LoadUtil.loadPlugin(pluginName, className);
         dataSource.setConfig(config);
         JarLoader jarLoader = LoadUtil.getClassLoader(pluginName);
@@ -27,14 +38,10 @@ public class DataSources {
         if (!filename.endsWith(DataSourceConst.FILE_SUFFIX)) {
             filename += DataSourceConst.FILE_SUFFIX;
         }
-
         String datasource = filename.substring(0, filename.length() -
                 DataSourceConst.FILE_SUFFIX.length());
         ObjectNode config = Configurations.read(filename);
         config.put(DataSourceKey.DATASOURCE, datasource);
-        String pluginName = config.get(DataSourceKey.NAME).asText();
-        ObjectNode plugin = Plugins.read(pluginName);
-        config.put(DataSourceKey.CLASS, plugin.get(DataSourceKey.CLASS).asText());
         return newInstance(config);
     }
 }
