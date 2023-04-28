@@ -38,7 +38,7 @@ public class Configurations {
         return arrayNode;
     }
 
-    public static void write(String filename, JsonNode config) {
+    public static void write(String filename, ObjectNode config) {
         JsonUtil.write(getPath(filename), config);
     }
 
@@ -53,39 +53,44 @@ public class Configurations {
         }
     }
 
-    public static String asText(String pluginName, ObjectNode object, String key) {
+    public static void validateRequired(ObjectNode conf, String key) {
+        String pluginName = conf.get(DataSourceKey.NAME).asText();
         ObjectNode attribute = Plugins.readAttributes(pluginName, key);
         boolean required = attribute.get(DataSourceKey.REQUIRED).asBoolean();
-        JsonNode node = object.get(key);
+        JsonNode node = conf.get(key);
         if (required) {
-            if (node == null || node.asText() == null) {
+            if (node == null) {
                 throw CommonException.asException(
                         DataSourceErrorCode.REQUIRED_VALUE,
                         String.format("您提供配置文件有误，[%s]是必填参数，不允许为空或者留白.", key));
             }
-        } else {
-            if (node == null || node.asText() == null) {
-                return null;
-            }
         }
+    }
+
+    public static String asString(ObjectNode conf, String key) {
+        validateRequired(conf, key);
+        JsonNode node = conf.get(key);
+
+        if (node == null || node.asText() == null) {
+            return null;
+        }
+
         return node.asText();
     }
 
-    public static int asInt(String pluginName, ObjectNode object, String key) {
-        ObjectNode attribute = Plugins.readAttributes(pluginName, key);
-        boolean required = attribute.get(DataSourceKey.REQUIRED).asBoolean();
-        JsonNode node = object.get(key);
-        if (required) {
-            if (node == null || node.asText() == null) {
-                throw CommonException.asException(
-                        DataSourceErrorCode.REQUIRED_VALUE,
-                        String.format("您提供配置文件有误，[%s]是必填参数，不允许为空或者留白.", key));
-            }
-        } else {
-            if (node == null || node.asText() == null) {
-                return 0;
-            }
+    public static Integer asInteger(ObjectNode conf, String key) {
+        validateRequired(conf, key);
+        JsonNode node = conf.get(key);
+
+        if (node == null) {
+            return null;
         }
+
         return node.asInt();
+    }
+
+    public static ObjectNode asObject(ObjectNode conf, String key) {
+        validateRequired(conf, key);
+        return (ObjectNode) conf.get(key);
     }
 }

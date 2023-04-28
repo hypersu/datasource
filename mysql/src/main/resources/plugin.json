@@ -40,7 +40,7 @@
     },
     "properties": {
       "value": null,
-      "type": "map",
+      "type": "object",
       "required": false,
       "visible": true,
       "description": "属性列表"
