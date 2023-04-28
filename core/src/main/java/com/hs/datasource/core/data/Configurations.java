@@ -89,7 +89,7 @@ public class Configurations {
         return node.asInt();
     }
 
-    public static ObjectNode asObject(ObjectNode conf, String key) {
+    public static ObjectNode asMap(ObjectNode conf, String key) {
         validateRequired(conf, key);
         return (ObjectNode) conf.get(key);
     }
