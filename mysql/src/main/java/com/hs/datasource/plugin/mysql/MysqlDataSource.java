@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hs.datasource.common.ConnectionAdapter;
 import com.hs.datasource.common.exception.CommonException;
 import com.hs.datasource.plugin.rdbms.*;
-import com.hs.datasource.rdbms.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
