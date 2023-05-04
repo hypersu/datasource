@@ -1,4 +1,4 @@
-package com.hs.datasource.oracle;
+package com.hs.datasource.plugin.oracle;
 
 public class OracleKey {
     public static final String USER = "user";

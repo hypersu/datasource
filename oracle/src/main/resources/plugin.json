@@ -1,6 +1,6 @@
 {
   "name": "oracle",
-  "class": "com.hs.datasource.oracle.OracleDataSource",
+  "class": "com.hs.datasource.plugin.oracle.OracleDataSource",
   "description": "oracle数据源11g版本及以上",
   "attributes": {
     "user": {

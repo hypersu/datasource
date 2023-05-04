@@ -1,4 +1,4 @@
-package com.hs.datasource.oracle;
+package com.hs.datasource.plugin.oracle;
 
 public class OracleConst {
     // 连接模式 sid:实例名、service:服务名

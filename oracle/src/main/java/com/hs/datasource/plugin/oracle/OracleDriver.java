@@ -1,18 +1,18 @@
-package com.hs.datasource.oracle;
+package com.hs.datasource.plugin.oracle;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hs.datasource.common.DataSourceKey;
 import com.hs.datasource.common.exception.CommonException;
-import com.hs.datasource.rdbms.RdbmsDriver;
-import com.hs.datasource.rdbms.RdbmsErrorCode;
+import com.hs.datasource.plugin.rdbms.RdbmsDriver;
+import com.hs.datasource.plugin.rdbms.RdbmsErrorCode;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import static com.hs.datasource.oracle.OracleConst.SERVICE_MODE;
-import static com.hs.datasource.oracle.OracleConst.SID_MODE;
+import static com.hs.datasource.plugin.oracle.OracleConst.SERVICE_MODE;
+import static com.hs.datasource.plugin.oracle.OracleConst.SID_MODE;
 
 public class OracleDriver implements RdbmsDriver {
     private static final String SID_URL_FORMAT = "jdbc:oracle:thin:@%s:%s:%s";

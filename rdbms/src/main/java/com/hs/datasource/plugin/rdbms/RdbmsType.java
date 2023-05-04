@@ -1,4 +1,4 @@
-package com.hs.datasource.rdbms;
+package com.hs.datasource.plugin.rdbms;
 
 public enum RdbmsType {
     MYSQL,

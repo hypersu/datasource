@@ -1,6 +1,6 @@
 {
   "name": "mysql",
-  "class": "com.hs.datasource.mysql.MysqlDataSource",
+  "class": "com.hs.datasource.plugin.mysql.MysqlDataSource",
   "description": "mysql数据源5.X版本以上",
   "attributes": {
     "user": {
