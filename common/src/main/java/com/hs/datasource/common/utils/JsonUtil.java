@@ -54,6 +54,7 @@ public class JsonUtil {
 
     public static void write(String path, JsonNode node) {
         try {
+            log.info("正在写入文件{}", path);
             File file = new File(path);
             File parent = file.getParentFile();
             if (!parent.exists()) {
