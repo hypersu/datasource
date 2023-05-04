@@ -7,6 +7,8 @@ import com.hs.datasource.common.exception.CommonException;
 import com.hs.datasource.rdbms.RdbmsDriver;
 import com.hs.datasource.rdbms.RdbmsErrorCode;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 public class MysqlDriver implements RdbmsDriver {
@@ -36,9 +38,18 @@ public class MysqlDriver implements RdbmsDriver {
         }
         String user = attributes.get(MysqlKey.USER).asText();
         String password = attributes.get(MysqlKey.PASSWORD).asText();
+        ObjectNode propertyObject = (ObjectNode) attributes.get(MysqlKey.PROPERTIES);
         Properties properties = new Properties();
         properties.put(MysqlKey.USER, user);
         properties.put(MysqlKey.PASSWORD, password);
+        if (propertyObject == null) {
+            return properties;
+        }
+        Iterator<Map.Entry<String, JsonNode>> iterator = propertyObject.fields();
+        while (iterator.hasNext()) {
+            Map.Entry<String, JsonNode> entry = iterator.next();
+            properties.put(entry.getKey(), entry.getValue().asText());
+        }
         return properties;
     }
 }

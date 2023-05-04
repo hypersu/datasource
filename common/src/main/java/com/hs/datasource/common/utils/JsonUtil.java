@@ -2,6 +2,7 @@ package com.hs.datasource.common.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hs.datasource.common.DataSourceErrorCode;
@@ -11,11 +12,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class JsonUtil {
-    private static ObjectMapper mapper = new ObjectMapper();
-
-    static {
-        mapper.writerWithDefaultPrettyPrinter();
-    }
+    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
 
     public static ArrayNode createArrayNode() {
         return mapper.createArrayNode();
@@ -62,7 +60,7 @@ public class JsonUtil {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            mapper.writeValue(file, node);
+            writer.writeValue(file, node);
         } catch (IOException e) {
             throw CommonException.asException(DataSourceErrorCode.IO_EXCEPTION, e);
         }
