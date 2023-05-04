@@ -7,14 +7,16 @@ import com.hs.datasource.common.exception.CommonException;
 import com.hs.datasource.rdbms.RdbmsDriver;
 import com.hs.datasource.rdbms.RdbmsErrorCode;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import static com.hs.datasource.oracle.OracleConst.SERVICE_MODE;
 import static com.hs.datasource.oracle.OracleConst.SID_MODE;
 
 public class OracleDriver implements RdbmsDriver {
-    private static final String SID_URL_FORMAT = "jdbc:mysql://%s:%s:%s";
-    private static final String SERVICE_URL_FORMAT = "jdbc:mysql://%s:%s/%s";
+    private static final String SID_URL_FORMAT = "jdbc:oracle:thin:@%s:%s:%s";
+    private static final String SERVICE_URL_FORMAT = "jdbc:oracle:thin:@%s:%s/%s";
 
     @Override
     public String getUrl(ObjectNode config) {
@@ -52,6 +54,15 @@ public class OracleDriver implements RdbmsDriver {
         Properties properties = new Properties();
         properties.put(OracleKey.USER, user);
         properties.put(OracleKey.PASSWORD, password);
+        ObjectNode propertyObject = (ObjectNode) attributes.get(OracleKey.PROPERTIES);
+        if (propertyObject == null) {
+            return properties;
+        }
+        Iterator<Map.Entry<String, JsonNode>> iterator = propertyObject.fields();
+        while (iterator.hasNext()) {
+            Map.Entry<String, JsonNode> entry = iterator.next();
+            properties.put(entry.getKey(), entry.getValue().asText());
+        }
         return properties;
     }
 }

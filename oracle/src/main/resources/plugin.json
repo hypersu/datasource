@@ -60,7 +60,7 @@
       "column",
       "primary"
     ],
-    "catalog": {
+    "schema": {
       "hierarchy": "schema.%{schema}",
       "parent_type": null,
       "fields": {

@@ -44,6 +44,33 @@ public class MetaDataCollector {
         }
     }
 
+    public static void collect(DataSource dataSource, ObjectNode metaNode) {
+        ObjectNode config = dataSource.getConfig();
+        String sourceName = config.get(DataSourceKey.DATASOURCE).asText();
+        String pluginName = config.get(DataSourceKey.NAME).asText();
+
+        // 元数据信息
+        ObjectNode pluginMeta = Plugins.readMeta(pluginName);
+        ArrayNode metaTypes = (ArrayNode) pluginMeta.get(DataSourceKey.TYPE);
+        log.info("正在采集元数据...");
+        //获取适配器
+        ConnectionAdapter conn = dataSource.getConnection();
+        try {
+            MetaDataAdapter meta = conn.getMetaData();
+            for (JsonNode node : metaTypes) {
+                String metaType = node.asText();
+                String hierarchy = pluginMeta.get(metaType)
+                        .get(DataSourceKey.HIERARCHY).asText();
+                String[] hierarchies = MetaUtil.arrayHierarchy(hierarchy);
+                ArrayNode metaNodes = meta.get(metaType, metaNode);
+                MetaDataTrees.write(sourceName, hierarchies, metaNodes);
+            }
+        } finally {
+            log.info("采集元数据结束.");
+            conn.close();
+        }
+    }
+
     /**
      * 采集特定类型的元数据
      */

@@ -213,12 +213,25 @@ public class RdbmsMetaDataAdapter implements MetaDataAdapter {
         ArrayNode tableNodes = getTables(null);
         ArrayNode nodes = JsonUtil.createArrayNode();
         tableNodes.forEach(node -> {
-            nodes.addAll(getPrimaries((ObjectNode) node));
+            nodes.addAll(getPrimariesByTable((ObjectNode) node));
         });
         return nodes;
     }
 
     public ArrayNode getPrimaries(ObjectNode object) {
+        String table = JsonUtil.getString(object, RdbmsKey.TABLE_NAME);
+        if (table != null) {
+            return getPrimariesByTable(object);
+        }
+        ArrayNode tableNodes = getTables(object);
+        ArrayNode nodes = JsonUtil.createArrayNode();
+        tableNodes.forEach(node -> {
+            nodes.addAll(getPrimariesByTable((ObjectNode) node));
+        });
+        return nodes;
+    }
+
+    public ArrayNode getPrimariesByTable(ObjectNode object) {
         String catalog = JsonUtil.getString(object, RdbmsKey.CATALOG);
         String schema = JsonUtil.getString(object, RdbmsKey.SCHEMA);
         String table = JsonUtil.getString(object, RdbmsKey.TABLE_NAME);

@@ -7,10 +7,12 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hs.datasource.common.DataSourceErrorCode;
 import com.hs.datasource.common.exception.CommonException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 public class JsonUtil {
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
