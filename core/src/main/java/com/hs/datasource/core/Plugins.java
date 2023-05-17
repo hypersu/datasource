@@ -10,6 +10,9 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 插件工具类
+ */
 public class Plugins {
     private static final Map<String, ObjectNode> PLUGINS = new ConcurrentHashMap<>();
 
