@@ -25,7 +25,7 @@
       "description": "主机地址"
     },
     "port": {
-      "value": 1521,
+      "value": 1433,
       "type": "integer",
       "required": true,
       "visible": true,
@@ -36,7 +36,7 @@
       "type": "string",
       "required": true,
       "visible": true,
-      "description": "实例名/服务名"
+      "description": "数据库名"
     },
     "properties": {
       "value": null,

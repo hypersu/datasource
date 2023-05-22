@@ -30,5 +30,12 @@
             </includes>
             <outputDirectory></outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>../sqlserver/target/datasource</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+            <outputDirectory></outputDirectory>
+        </fileSet>
     </fileSets>
 </assembly>

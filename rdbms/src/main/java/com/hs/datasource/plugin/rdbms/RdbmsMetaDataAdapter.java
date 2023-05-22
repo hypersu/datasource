@@ -102,6 +102,9 @@ public class RdbmsMetaDataAdapter implements MetaDataAdapter {
             while (rs.next()) {
                 ObjectNode node = JsonUtil.createObjectNode();
                 String tableCat = rs.getString("TABLE_CATALOG");
+                if (tableCat == null && catalog != null) {
+                    tableCat = catalog;
+                }
                 JsonUtil.putNotNull(node, RdbmsKey.CATALOG, tableCat);
                 String tableSch = rs.getString("TABLE_SCHEM");
                 JsonUtil.putNotNull(node, RdbmsKey.SCHEMA, tableSch);
