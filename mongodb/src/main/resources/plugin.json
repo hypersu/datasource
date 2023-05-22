@@ -1,0 +1,161 @@
+{
+  "name": "mongodb",
+  "class": "com.hs.datasource.plugin.mongodb.MongoDBDataSource",
+  "description": "mongodb数据源6.0版本以上",
+  "attributes": {
+    "user": {
+      "value": "root",
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "用户名称"
+    },
+    "password": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "用户密码"
+    },
+    "host": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "主机地址"
+    },
+    "port": {
+      "value": 3306,
+      "type": "integer",
+      "required": true,
+      "visible": true,
+      "description": "主机端口"
+    },
+    "database": {
+      "value": null,
+      "type": "string",
+      "required": true,
+      "visible": true,
+      "description": "数据库名"
+    },
+    "properties": {
+      "value": null,
+      "type": "map",
+      "required": false,
+      "visible": true,
+      "description": "属性列表"
+    }
+  },
+  "meta": {
+    "type": [
+      "catalog",
+      "table",
+      "column",
+      "primary"
+    ],
+    "catalog": {
+      "hierarchy": "catalog.%{catalog}",
+      "parent_type": null,
+      "fields": {
+        "catalog": {
+          "type": "string",
+          "description": "库名"
+        }
+      }
+    },
+    "table": {
+      "hierarchy": "catalog.%{catalog}.table.%{table_name}",
+      "parent_type": "catalog",
+      "fields": {
+        "catalog": {
+          "type": "string",
+          "description": "库名"
+        },
+        "table_name": {
+          "type": "string",
+          "description": "表名"
+        },
+        "comment": {
+          "type": "string",
+          "description": "表注释"
+        }
+      }
+    },
+    "column": {
+      "hierarchy": "catalog.%{catalog}.table.%{table_name}.column.%{column_name}",
+      "parent_type": "table",
+      "fields": {
+        "catalog": {
+          "type": "string",
+          "description": "库名"
+        },
+        "table_name": {
+          "type": "string",
+          "description": "表名"
+        },
+        "column_name": {
+          "type": "string",
+          "description": "字段名"
+        },
+        "data_type": {
+          "type": "integer",
+          "description": "数据类型"
+        },
+        "type_name": {
+          "type": "string",
+          "description": "类型名称"
+        },
+        "length": {
+          "type": "integer",
+          "description": "字段长度"
+        },
+        "precision": {
+          "type": "integer",
+          "description": "字段精度"
+        },
+        "scale": {
+          "type": "integer",
+          "description": "字段标度"
+        },
+        "nullable": {
+          "type": "boolean",
+          "description": "是否可空"
+        },
+        "comment": {
+          "type": "string",
+          "description": "字段注释"
+        },
+        "sort": {
+          "type": "integer",
+          "description": "字段排序"
+        }
+      }
+    },
+    "primary": {
+      "hierarchy": "catalog.%{catalog}.table.%{table_name}.primary.%{column_name}",
+      "parent_type": "table",
+      "fields": {
+        "catalog": {
+          "type": "string",
+          "description": "库名"
+        },
+        "table_name": {
+          "type": "string",
+          "description": "表名"
+        },
+        "column_name": {
+          "type": "string",
+          "description": "字段名"
+        },
+        "key_seq": {
+          "type": "int",
+          "description": "字段序号"
+        },
+        "pk_name": {
+          "type": "string",
+          "description": "主键名"
+        }
+      }
+    }
+  }
+}

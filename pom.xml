@@ -11,10 +11,14 @@
     <modules>
         <module>common</module>
         <module>core</module>
+        <!--关系型数据库-->
         <module>rdbms</module>
         <module>mysql</module>
         <module>oracle</module>
         <module>sqlserver</module>
+        <!--nosql数据库-->
+        <module>mongodb</module>
+        <module>influxdb</module>
         <!-- must be in last -->
         <module>assembly</module>
     </modules>
@@ -27,9 +31,9 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.assembly.version>3.3.0</maven.assembly.version>
-        <slf4j.version>2.0.0-alpha5</slf4j.version>
-        <logback.version>1.3.0-alpha10</logback.version>
-        <jackson.version>2.13.0</jackson.version>
+        <slf4j.version>2.0.7</slf4j.version>
+        <logback.version>1.4.7</logback.version>
+        <jackson.version>2.15.1</jackson.version>
         <lombok.version>1.18.26</lombok.version>
     </properties>
 

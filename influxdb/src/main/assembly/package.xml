@@ -1,0 +1,38 @@
+<assembly
+        xmlns="http://maven.apache.org/ASSEMBLY/2.1.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.1 http://maven.apache.org/xsd/assembly-2.1.1.xsd">
+    <id>release</id>
+    <formats>
+        <format>dir</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>plugin.json</include>
+                <include>plugin_template.json</include>
+            </includes>
+            <outputDirectory>plugin/influxdb</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>target/</directory>
+            <includes>
+                <include>influxdb-1.0.0.jar</include>
+            </includes>
+            <outputDirectory>plugin/influxdb</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>plugin/influxdb/libs</outputDirectory>
+            <includes>
+                <include>org.influxdb:influxdb-java</include>
+            </includes>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>
