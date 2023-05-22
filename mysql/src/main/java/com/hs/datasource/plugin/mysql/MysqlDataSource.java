@@ -11,8 +11,8 @@ import java.sql.SQLException;
 
 public class MysqlDataSource extends RdbmsDataSource {
     private ObjectNode config;
-    private MysqlDialect dialect = new MysqlDialect();
-    private MysqlDriver driver = new MysqlDriver();
+    private final MysqlDialect dialect = new MysqlDialect();
+    private final MysqlDriver driver = new MysqlDriver();
 
     @Override
     public ObjectNode getConfig() {

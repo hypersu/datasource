@@ -6,11 +6,6 @@ import com.hs.datasource.plugin.rdbms.RdbmsConst;
 import com.hs.datasource.plugin.rdbms.RdbmsDialect;
 
 public class OracleDialect implements RdbmsDialect {
-    private static final OracleDialect DIALECT = new OracleDialect();
-
-    public static OracleDialect newInstance() {
-        return DIALECT;
-    }
 
     @Override
     public boolean isSupportCatalog() {

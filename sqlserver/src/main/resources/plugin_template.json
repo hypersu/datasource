@@ -1,0 +1,11 @@
+{
+  "name": "sqlserver",
+  "attributes": {
+    "user": null,
+    "password": null,
+    "host": null,
+    "port": 1433,
+    "database": null,
+    "properties": {}
+  }
+}

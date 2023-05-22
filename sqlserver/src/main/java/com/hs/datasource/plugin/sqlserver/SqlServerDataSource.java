@@ -1,4 +1,4 @@
-package com.hs.datasource.plugin.oracle;
+package com.hs.datasource.plugin.sqlserver;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hs.datasource.common.ConnectionAdapter;
@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class OracleDataSource extends RdbmsDataSource {
+public class SqlServerDataSource extends RdbmsDataSource {
     private ObjectNode config;
-    private final OracleDialect dialect = new OracleDialect();
-    private final OracleDriver driver = new OracleDriver();
+    private final SqlServerDialect dialect = new SqlServerDialect();
+    private final SqlServerDriver driver = new SqlServerDriver();
 
     @Override
     public ObjectNode getConfig() {
@@ -34,7 +34,7 @@ public class OracleDataSource extends RdbmsDataSource {
         } catch (SQLException e) {
             throw CommonException.asException(
                     RdbmsErrorCode.INVALID_CONNECTION,
-                    "获取Oracle连接异常.", e);
+                    "获取SqlServer连接异常.", e);
         }
     }
 
